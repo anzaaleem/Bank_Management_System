@@ -30,15 +30,15 @@ if($result->num_rows==0){
   $row = mysqli_fetch_assoc($result);
 $password = $row['password'];
 
-  if ($role == "admin" && password_verify($pass, $password) ) {
+  if (($role == "admin") && ($pass== $password) ) {
     header('Location: admin/admin.php', true);
-} else if ($role == "accountant" && password_verify($pass, $password) ) {
+} else if (($role == "accountant") && ($pass== $password) ) {
     header('Location: accountant/accountant.php', true);
-} else if ($role == "c_support" && password_verify($pass, $password) ) {
-    header('Location: customer support/c_support.php', true);
+} else if (($role == "csupport") && ($pass== $password) ) {
+    header('Location: csupport/c_support.php', true);
 } else {
-    // Handle users with no matching role (optional)
-    echo "Invalid role or no role assigned.";
+    // Handle users with no matching role
+    echo "Invalid password";
 }
 
     ?>
