@@ -3,7 +3,7 @@ $host = "localhost";
 $username = "root";
 $password = "";
 $dbname = "hbl bank";
-$a_id=$_POST['a_id'];
+$c_id=$_POST['c_id'];
 
 // Create connection
 $conn = mysqli_connect($host, $username, $password, $dbname);
@@ -28,27 +28,24 @@ echo "";
   <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Contact Info</th>
-      <th scope="col">Address</th>
       <th scope="col">Account ID</th>
+      <th scope="col">Account balance</th>
+      <th scope="col">Branch ID</th>
     </tr>
   </thead>
   <tbody>
     <?php
-$result=mysqli_query($conn, "SELECT * FROM customer where account_id=$a_id");
+$result=mysqli_query($conn, "SELECT account_id, account_balance, branch_id FROM account where customer_id=$c_id");
 if($result->num_rows==0){
   echo "No records found";
 }
 else{
-  while($r=mysqli_fetch_assoc($result)){ ?>
+  while($r=mysqli_fetch_assoc($result)){  ?> 
+  <h3> <?php echo "Account info of Customer ID#".$c_id; ?> </h3> 
  <tr>
-      <td  scope="row"><?php echo $r['customer_id']; ?></td>
-      <td><?php echo $r['customer_name']; ?></td>
-      <td><?php echo $r['phone_no']; ?></td>
-      <td><?php echo $r['customer_address']; ?></td>
-      <td><?php echo $r['account_id']; } }?></td>
+      <td  scope="row"><?php echo $r['account_id']; ?></td>
+      <td><?php echo $r['account_balance']; ?></td>
+      <td><?php echo $r['branch_id']; } }?></td>
  </tr>
 </tbody>
 </table>
